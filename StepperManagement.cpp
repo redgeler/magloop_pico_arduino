@@ -142,16 +142,40 @@ long StepperManagement::ConvertFrequencyToStepperCount(uint32_t presentFrequency
   long count = 0;
   switch (data.workingData.currentBand)
   {
+  case 80:
+    count = data.workingData.bandLimitPositionCounts[0][0] + (long)(countPerHertz[0] * ((float)(presentFrequency - data.LOWEND80M)));
+    break;
+
+  case 60:
+    count = data.workingData.bandLimitPositionCounts[1][0] + (long)(countPerHertz[1] * ((float)(presentFrequency - data.LOWEND60M)));
+    break;
+
   case 40: //   intercept                  + slopeCoefficient * newFrequency
-    count = data.workingData.bandLimitPositionCounts[0][0] + (long)(countPerHertz[0] * ((float)(presentFrequency - data.LOWEND40M)));
+    count = data.workingData.bandLimitPositionCounts[2][0] + (long)(countPerHertz[2] * ((float)(presentFrequency - data.LOWEND40M)));
     break;
 
   case 30:
-    count = data.workingData.bandLimitPositionCounts[1][0] + (long)(countPerHertz[1] * ((float)(presentFrequency - data.LOWEND30M)));
+    count = data.workingData.bandLimitPositionCounts[3][0] + (long)(countPerHertz[3] * ((float)(presentFrequency - data.LOWEND30M)));
     break;
 
   case 20:
-    count = data.workingData.bandLimitPositionCounts[2][0] + (long)(countPerHertz[2] * ((float)(presentFrequency - data.LOWEND20M)));
+    count = data.workingData.bandLimitPositionCounts[4][0] + (long)(countPerHertz[4] * ((float)(presentFrequency - data.LOWEND20M)));
+    break;
+
+  case 17:
+    count = data.workingData.bandLimitPositionCounts[5][0] + (long)(countPerHertz[5] * ((float)(presentFrequency - data.LOWEND17M)));
+    break;
+
+  case 15:
+    count = data.workingData.bandLimitPositionCounts[6][0] + (long)(countPerHertz[6] * ((float)(presentFrequency - data.LOWEND15M)));
+    break;
+
+  case 12:
+    count = data.workingData.bandLimitPositionCounts[7][0] + (long)(countPerHertz[7] * ((float)(presentFrequency - data.LOWEND12M)));
+    break;
+
+  case 10:
+    count = data.workingData.bandLimitPositionCounts[8][0] + (long)(countPerHertz[8] * ((float)(presentFrequency - data.LOWEND10M)));
     break;
 
   default:

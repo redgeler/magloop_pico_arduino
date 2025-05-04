@@ -57,27 +57,62 @@ const std::string releaseDate = "8-26-24";
 
   // Bands used:
 
-  std::vector<std::string> bands = {"40M", "30M", "20M"};
+  std::vector<std::string> bands = {"80M","60M","40M","30M","20M","17M","15M","12M","10M"};
+
+  //80M
+  static const uint32_t LOWEND80M = 3500000;
+  static const uint32_t HIGHEND80M = 3800000;
+
+  //60M
+  // Playing safe here as the UK band is split (5354000 to 5358000) and (5362000 to 5374500) and don't want to transmit broadcast out of band.  
+  static const uint32_t LOWEND60M = 5362000;
+  static const uint32_t HIGHEND60M = 5374500;
+  
+   //40M
   static const uint32_t LOWEND40M = 7000000;
-  static const uint32_t HIGHEND40M = 7300000;
+  static const uint32_t HIGHEND40M = 7200000;
+   //30M
   static const uint32_t LOWEND30M = 10100000;
   static const uint32_t HIGHEND30M = 10150000;
+   //20M
   static const uint32_t LOWEND20M = 14000000;
   static const uint32_t HIGHEND20M = 14350000;
+   //17M
+  static const uint32_t LOWEND17M = 18068000;
+  static const uint32_t HIGHEND17M = 18168000;
+   //15M
+  static const uint32_t LOWEND15M = 21000000;
+  static const uint32_t HIGHEND15M = 21450000;
+   //12M
+  static const uint32_t LOWEND12M = 24890000;
+  static const uint32_t HIGHEND12M = 24990000;
+   //10M
+  static const uint32_t LOWEND10M = 28000000;
+  static const uint32_t HIGHEND10M = 29700000;
+
 
   // Preset frequency constants in the dataStruct are initial defaults; these defaults are saved to the
   // EEPROM initially, but they can be overwritten later if the user desires.  The presets will always
   // be read from the EEPROM.
   struct dataStruct
   {
-    uint32_t presetFrequencies[3][6] =
+    uint32_t presetFrequencies[9][6] =
         {
-            {7030000L, 7040000L, 7100000L, 7150000L, 7250000L, 7285000L},       // 40M
-            {10106000L, 10116000L, 10120000L, 10130000L, 10140000L, 10145000L}, // 30M
-            {14030000L, 14060000L, 14100000L, 14200000L, 14250000L, 14285000L}  // 20M
+            {3542857L, 3585714L, 3628571L, 3671428L, 3714285L, 3757142L}, // 80M
+            {5363785L, 5365571L, 5367357L, 5369142L, 5370928L, 5372714L}, // 60M
+            {7028571L, 7057142L, 7085714L, 7114285L, 7142857L, 7171428L}, // 40M
+
+            {10107142L, 10114285L, 10121428L, 10128571L, 10135714L, 10142857L}, // 30M
+            {14050000L, 14100000L, 14150000L, 14200000L, 14250000L, 14300000L}, // 20M
+            {18082285L, 18096571L, 18110857L, 18125142L, 18139428L, 18153714L}, // 17M
+            
+            {21064286L, 21128571L, 21192857L, 21257143L, 21321429L, 21385714L}, // 15M
+            {24904286L, 24918571L, 24932857L, 24947143L, 24961429L, 24975714L}, // 12M
+            {28242857L, 28485714L, 28728571L, 28971429L, 29214286L, 29457143L} // 10M
+
     };
-    uint32_t bandLimitPositionCounts[3][2];
-    uint32_t bandEdges[3][2]; // = { // Band edges in Hz
+    uint32_t bandLimitPositionCounts[9][2];
+    uint32_t bandEdges[9][2]; // = { // Band edges in Hz
                               //   {LOWEND40M, HIGHEND40M},
                               //   {LOWEND30M, HIGHEND30M},
                               //   {LOWEND20M, HIGHEND20M}};
